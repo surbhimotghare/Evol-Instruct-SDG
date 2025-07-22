@@ -50,7 +50,7 @@ A sophisticated synthetic data generation application built with **Evol-Instruct
 - **Frontend**: Modern HTML/CSS/JavaScript with Font Awesome
 - **AI**: OpenAI GPT-4o-mini for question generation
 - **File Processing**: PDF.js + Papa Parse for client-side parsing
-- **Deployment**: Vercel-ready configuration
+- **Deployment**: Render.com cloud deployment
 
 ## 🚀 Quick Start
 
@@ -66,3 +66,102 @@ A sophisticated synthetic data generation application built with **Evol-Instruct
    git clone <your-repo-url>
    cd s07-bonus-evol-instruct-app
    ```
+
+2. **Install dependencies**
+   ```bash
+   uv sync
+   ```
+
+3. **Set up environment variables**
+   ```bash
+   export OPENAI_API_KEY="your-openai-api-key"
+   ```
+
+4. **Start the development server**
+   ```bash
+   uvicorn api.main:app --reload --host 0.0.0.0 --port 8000
+   ```
+
+5. **Open your browser**
+   Navigate to `http://localhost:8000`
+
+## 🌐 Live Demo
+
+The app is deployed and available at: [https://evol-instruct-sdg.onrender.com/](https://evol-instruct-sdg.onrender.com/)
+
+## Deployment (Render)
+
+1. **Create a new Web Service on [Render](https://render.com/)**
+2. Connect your GitHub repository.
+3. Set the build and start commands:
+   - **Build Command:** (leave blank or use `pip install -r requirements.txt`)
+   - **Start Command:**
+     ```bash
+     uvicorn api.main:app --host 0.0.0.0 --port $PORT
+     ```
+4. Add the environment variable `OPENAI_API_KEY` in the Render dashboard.
+5. Deploy! Your app will be available at the Render-provided URL (see above for the public demo).
+
+## API Endpoints
+
+- `GET /` - Main application interface
+- `GET /health` - Health check endpoint
+- `GET /docs` - Interactive API documentation
+- `POST /generate` - Generate synthetic questions from uploaded documents
+- `POST /generate-demo` - Generate demo questions (no file upload required)
+- `GET /progress-stream` - Server-Sent Events stream for progress updates
+
+## Configuration
+
+### Environment Variables
+
+- `OPENAI_API_KEY`: Your OpenAI API key (required)
+
+### File Upload Limits
+
+- Maximum 10 documents per request
+- Supported formats: PDF, DOCX, TXT, CSV, JSON
+
+## Development
+
+### Project Structure
+
+```
+├── api/
+│   ├── main.py          # FastAPI application
+│   ├── evol_graph.py    # LangGraph implementation
+│   └── models.py        # Pydantic models
+├── static/
+│   ├── index.html       # Main frontend
+│   ├── styles.css       # Styling
+│   └── script.js        # Frontend logic
+├── requirements.txt     # Python dependencies
+├── runtime.txt          # Python runtime version
+└── deploy.sh            # Deployment script
+```
+
+### Running Tests
+
+```bash
+# Test the API endpoints
+python -m pytest tests/ -v
+
+# Test with curl
+curl -X GET http://localhost:8000/health
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
+
+## License
+
+This project is licensed under the MIT License.
+
+## Support
+
+For issues and questions, please open an issue on GitHub.
