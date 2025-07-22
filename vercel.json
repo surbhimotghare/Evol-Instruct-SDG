@@ -14,12 +14,5 @@
   ],
   "env": {
     "PYTHONPATH": "."
-  },
-  "git": {
-    "deploymentEnabled": {
-      "main": true,
-      "preview": true,
-      "development": true
-    }
   }
 } 
