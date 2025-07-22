@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evol-Instruct API - Synthetic Data Generation</title>
+    <link rel="stylesheet" href="/static/styles.css?v=2">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-brain"></i>
+                    <h1>Evol-Instruct</h1>
+                </div>
+                <p class="subtitle">Professional Synthetic Data Generation with LangGraph</p>
+                <div class="feature-highlights">
+                    <span class="highlight-item"><i class="fas fa-cog"></i> Simple Evolution</span>
+                    <span class="highlight-item"><i class="fas fa-link"></i> Multi-Context</span>
+                    <span class="highlight-item"><i class="fas fa-brain"></i> Reasoning</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- OpenAI API Key Section -->
+        <section id="apiKeySection" class="api-key-section">
+            <form id="apiKeyForm" autocomplete="off" onsubmit="return false;">
+                <label for="openaiApiKey"><i class="fas fa-key"></i> OpenAI API Key</label>
+                <div class="api-key-input-wrapper">
+                    <input type="password" id="openaiApiKey" placeholder="sk-..." autocomplete="off">
+                    <button type="button" id="toggleApiKey" title="Show/Hide"><i class="fas fa-eye"></i></button>
+                    <button type="submit" id="saveApiKeyBtn" class="btn btn-secondary" style="margin-left:1rem;">Save</button>
+                    <button type="button" id="clearApiKeyBtn" class="btn btn-secondary" style="margin-left:0.5rem;">Clear</button>
+                </div>
+                <div id="apiKeyStatus" class="api-key-status"></div>
+            </form>
+        </section>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Input Section -->
+            <section class="input-section">
+                <div class="card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-cloud-upload-alt"></i> Upload Documents</h2>
+                        <span class="card-badge">Professional</span>
+                    </div>
+                    <p class="description">
+                        Upload up to 10 documents (<strong>.txt</strong>, <strong>.pdf</strong>, <strong>.csv</strong>) to generate sophisticated evolved questions using advanced AI methodology.<br>
+                        <span class="evolution-preview simple">Simple Evolution</span> • 
+                        <span class="evolution-preview multi-context">Multi-Context</span> • 
+                        <span class="evolution-preview reasoning">Reasoning</span>
+                    </p>
+                    
+                    <div class="input-grid">
+                        <div class="input-group">
+                            <label for="fileInput">
+                                <i class="fas fa-file-upload"></i>
+                                Select Documents
+                            </label>
+                            <div class="file-input-wrapper">
+                                <input type="file" id="fileInput" accept=".txt,.pdf,.csv" multiple>
+                                <div class="file-input-overlay">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <span>Choose files or drag and drop</span>
+                                    <small>Max 10 files, 2MB each • Supports .txt, .pdf, .csv</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="targetQuestions">
+                                <i class="fas fa-sliders-h"></i>
+                                Target Questions
+                            </label>
+                            <div class="number-input-wrapper">
+                                <input type="number" id="targetQuestions" value="9" min="3" max="15">
+                                <span class="input-addon">questions</span>
+                            </div>
+                            <small>3 questions per evolution type (3-15 total)</small>
+                        </div>
+                    </div>
+                    
+                    <div id="filePreview" class="file-preview"></div>
+                    
+                    <div class="action-section">
+                        <div class="button-group">
+                            <button id="generateBtn" class="btn btn-primary">
+                                <i class="fas fa-magic"></i>
+                                Generate Questions
+                                <span class="btn-shine"></span>
+                            </button>
+                            <button id="demoBtn" class="btn btn-secondary">
+                                <i class="fas fa-play"></i>
+                                Try Demo
+                            </button>
+                        </div>
+                        <p class="action-note">
+                            <i class="fas fa-info-circle"></i>
+                            Processing typically takes 30-60 seconds for comprehensive analysis
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Loading Section -->
+            <section id="loadingSection" class="loading-section hidden">
+                <div class="card">
+                    <div class="loading-content">
+                        <div class="loading-animation">
+                            <div class="spinner"></div>
+                            <div class="loading-dots">
+                                <span></span><span></span><span></span>
+                            </div>
+                        </div>
+                        <h3>Generating Evolved Questions...</h3>
+                        <p>Our AI is analyzing your documents and creating sophisticated question variations</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section id="resultsSection" class="results-section hidden">
+                <div class="card">
+                    <div class="results-header">
+                        <div class="results-title">
+                            <h2><i class="fas fa-chart-line"></i> Generated Results</h2>
+                            <span class="results-badge">Success</span>
+                        </div>
+                        <div class="stats">
+                            <div class="stat">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="stat-content">
+                                    <span class="stat-number" id="questionCount">0</span>
+                                    <span class="stat-label">Questions</span>
+                                </div>
+                            </div>
+                            <div class="stat">
+                                <i class="fas fa-stopwatch"></i>
+                                <div class="stat-content">
+                                    <span class="stat-number" id="processingTime">0</span>
+                                    <span class="stat-label">Seconds</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Evolution Types Tabs -->
+                    <div class="tabs">
+                        <button class="tab-btn active" data-tab="simple">
+                            <i class="fas fa-cog"></i>
+                            <span class="tab-content">
+                                <span class="tab-title">Simple Evolution</span>
+                                <span class="tab-desc">Enhanced & Detailed</span>
+                            </span>
+                        </button>
+                        <button class="tab-btn" data-tab="multi_context">
+                            <i class="fas fa-project-diagram"></i>
+                            <span class="tab-content">
+                                <span class="tab-title">Multi-Context</span>
+                                <span class="tab-desc">Cross-Document</span>
+                            </span>
+                        </button>
+                        <button class="tab-btn" data-tab="reasoning">
+                            <i class="fas fa-brain"></i>
+                            <span class="tab-content">
+                                <span class="tab-title">Reasoning</span>
+                                <span class="tab-desc">Logical Analysis</span>
+                            </span>
+                        </button>
+                    </div>
+                    
+                    <!-- Questions Container -->
+                    <div id="questionsContainer" class="questions-container">
+                        <!-- Questions will be populated here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Error Section -->
+            <section id="errorSection" class="error-section hidden">
+                <div class="card error-card">
+                    <div class="error-content">
+                        <div class="error-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <h3>Something went wrong</h3>
+                        <p id="errorMessage">Please try again or contact support if the issue persists.</p>
+                        <div class="error-actions">
+                            <button class="btn btn-primary" onclick="hideError()">
+                                <i class="fas fa-redo"></i>
+                                Try Again
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p>Powered by <strong>Evol-Instruct</strong> methodology and <strong>LangGraph</strong> framework</p>
+                <p>Based on research from the <a href="https://arxiv.org/pdf/2304.12244" target="_blank">WizardLM paper</a></p>
+                <div class="footer-links">
+                    <a href="/docs" target="_blank"><i class="fas fa-book"></i> API Documentation</a>
+                    <a href="/evolution-types" target="_blank"><i class="fas fa-info-circle"></i> Evolution Types</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="/static/script.js?v=2"></script>
+</body>
+</html> 
