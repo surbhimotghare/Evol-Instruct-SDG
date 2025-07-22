@@ -26,7 +26,7 @@ A sophisticated synthetic data generation application built with **Evol-Instruct
 
 ### System Architecture
 
-![System Architecture Diagram](https://i.imgur.com/58ktzG5.png)
+![System Architecture Diagram](https://i.imgur.com/EIJC793.jpeg)
 
 *Clean, organized view of the Evol-Instruct synthetic data generation pipeline showing data flow from frontend to output generation*
 
