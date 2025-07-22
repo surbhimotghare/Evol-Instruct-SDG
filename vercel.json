@@ -1,11 +1,9 @@
 {
+  "version": 2,
   "builds": [
     {
       "src": "api/main.py",
-      "use": "@vercel/python",
-      "config": {
-        "maxLambdaSize": "50mb"
-      }
+      "use": "@vercel/python"
     }
   ],
   "routes": [
@@ -15,11 +13,18 @@
     }
   ],
   "env": {
-    "OPENAI_API_KEY": "@openai-api-key"
+    "PYTHONPATH": "."
   },
   "functions": {
     "api/main.py": {
       "maxDuration": 300
+    }
+  },
+  "git": {
+    "deploymentEnabled": {
+      "main": true,
+      "preview": true,
+      "development": true
     }
   }
 } 

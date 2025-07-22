@@ -163,3 +163,5 @@ datasets/
 data/
 raw_data/
 processed_data/
+.vercel
+.env*.local
