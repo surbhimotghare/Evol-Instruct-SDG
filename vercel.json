@@ -15,11 +15,6 @@
   "env": {
     "PYTHONPATH": "."
   },
-  "functions": {
-    "api/main.py": {
-      "maxDuration": 300
-    }
-  },
   "git": {
     "deploymentEnabled": {
       "main": true,
