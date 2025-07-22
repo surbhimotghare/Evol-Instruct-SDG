@@ -2,6 +2,71 @@
 *.json
 loan_data_kg.json
 data/
+*.csv
+*.xlsx
+*.xls
+*.parquet
+*.h5
+*.hdf5
+*.pkl
+*.pickle
+*.joblib
+*.model
+*.bin
+*.dat
+
+# Large media files
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.wmv
+*.flv
+*.webm
+*.mp3
+*.wav
+*.flac
+*.aac
+*.ogg
+*.wma
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.bmp
+*.tiff
+*.tga
+*.svg
+*.ico
+*.pdf
+*.doc
+*.docx
+*.ppt
+*.pptx
+*.xls
+*.xlsx
+
+# Large archives
+*.zip
+*.rar
+*.7z
+*.tar
+*.gz
+*.bz2
+*.xz
+*.lzma
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+*.mdb
+*.accdb
+
+# Log files (can be large)
+*.log
+logs/
+log/
 
 # Python
 __pycache__/
@@ -51,10 +116,6 @@ venv.bak/
 ehthumbs.db
 Thumbs.db
 
-# Logs
-*.log
-logs/
-
 # Test files with API keys
 test_*.py
 
@@ -67,4 +128,38 @@ test_*.py
 
 # Temporary files
 *.tmp
-*.temp 
+*.temp
+
+# Jupyter notebooks (can contain large outputs)
+*.ipynb
+
+# Large model files
+*.pth
+*.pt
+*.ckpt
+*.safetensors
+*.onnx
+*.tflite
+*.pb
+*.h5
+*.keras
+
+# Cache directories
+.cache/
+cache/
+__pycache__/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Node modules (if any frontend dependencies)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Large datasets
+datasets/
+data/
+raw_data/
+processed_data/
